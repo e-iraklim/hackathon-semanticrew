@@ -1,0 +1,186 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "ReportSection",
+  "displayName": "01 | Executive Snapshot",
+  "displayOption": "FitToPage",
+  "width": 1280,
+  "height": 720,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F5F7F8'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "channelBreakdown",
+      "target": "brand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelBreakdown",
+      "target": "channel",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelBreakdown",
+      "target": "channelRevenue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelBreakdown",
+      "target": "date",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelBreakdown",
+      "target": "kpi0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelBreakdown",
+      "target": "kpi1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelBreakdown",
+      "target": "kpi2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelBreakdown",
+      "target": "kpi3",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelBreakdown",
+      "target": "revenueTrend",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelBreakdown",
+      "target": "year",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelRevenue",
+      "target": "brand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelRevenue",
+      "target": "channel",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelRevenue",
+      "target": "channelBreakdown",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelRevenue",
+      "target": "date",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelRevenue",
+      "target": "kpi0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelRevenue",
+      "target": "kpi1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelRevenue",
+      "target": "kpi2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelRevenue",
+      "target": "kpi3",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelRevenue",
+      "target": "revenueTrend",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelRevenue",
+      "target": "year",
+      "type": "DataFilter"
+    },
+    {
+      "source": "revenueTrend",
+      "target": "brand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "revenueTrend",
+      "target": "channel",
+      "type": "DataFilter"
+    },
+    {
+      "source": "revenueTrend",
+      "target": "channelBreakdown",
+      "type": "DataFilter"
+    },
+    {
+      "source": "revenueTrend",
+      "target": "channelRevenue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "revenueTrend",
+      "target": "date",
+      "type": "DataFilter"
+    },
+    {
+      "source": "revenueTrend",
+      "target": "kpi0",
+      "type": "DataFilter"
+    },
+    {
+      "source": "revenueTrend",
+      "target": "kpi1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "revenueTrend",
+      "target": "kpi2",
+      "type": "DataFilter"
+    },
+    {
+      "source": "revenueTrend",
+      "target": "kpi3",
+      "type": "DataFilter"
+    },
+    {
+      "source": "revenueTrend",
+      "target": "year",
+      "type": "DataFilter"
+    }
+  ]
+}

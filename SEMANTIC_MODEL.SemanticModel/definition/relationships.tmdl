@@ -1,0 +1,36 @@
+relationship eaaf8ca1-a62f-76b1-729e-b003dd8a99cf
+	fromColumn: factsales.ChannelKey
+	toColumn: dimchannel.ChannelKey
+
+relationship dimdate_factsales_DateKey
+	fromColumn: factsales.DateKey
+	toColumn: dimdate.DateKey
+
+relationship dimdate_factinventorysnapshot_DateKey
+	fromColumn: factinventorysnapshot.DateKey
+	toColumn: dimdate.DateKey
+
+relationship dimproduct_factsales_ProductKey
+	fromColumn: factsales.ProductKey
+	toColumn: dimproduct.ProductKey
+
+relationship dimproduct_factinventorysnapshot_ProductKey
+	fromColumn: factinventorysnapshot.ProductKey
+	toColumn: dimproduct.ProductKey
+
+relationship dimlocation_factsales_LocationKey
+	fromColumn: factsales.LocationKey
+	toColumn: dimlocation.LocationKey
+
+relationship dimlocation_factinventorysnapshot_LocationKey
+	fromColumn: factinventorysnapshot.LocationKey
+	toColumn: dimlocation.LocationKey
+
+relationship 4e5372e3-16be-eb8b-26a5-d62d98ccaa92
+	fromColumn: factsales.BatchID
+	toColumn: dimreportingperiod.BatchID
+
+relationship 075363e8-e4c8-e71b-6b6c-afdf27e5610e
+	fromColumn: factinventorysnapshot.BatchID
+	toColumn: dimreportingperiod.BatchID
+

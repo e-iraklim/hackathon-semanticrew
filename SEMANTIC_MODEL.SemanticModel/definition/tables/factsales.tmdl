@@ -1,0 +1,183 @@
+table factsales
+	lineageTag: 40bc79b6-421f-4ff8-8b74-87fe5e5db9a3
+	sourceLineageTag: [dbo].[factsales]
+
+	/// Certified revenue net of returns and discounts for closed financial periods.
+	measure 'Net Sales' = SUM(factsales[NetSalesSignedUSD])
+		lineageTag: 8f7e2ba8-80ca-4596-9000-6a383442c8a0
+
+		changedProperty = Name
+
+		changedProperty = Description
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SalesEventKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 1275434a-0e21-425f-941f-76b36e3462cc
+		sourceLineageTag: SalesEventKey
+		summarizeBy: count
+		sourceColumn: SalesEventKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column EventID
+		dataType: string
+		lineageTag: c378a5b0-0d50-4463-896a-3fd835cdfd9b
+		sourceLineageTag: EventID
+		summarizeBy: none
+		sourceColumn: EventID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderID
+		dataType: int64
+		formatString: 0
+		lineageTag: 356d4160-87d9-41f5-8408-a195dabed5b0
+		sourceLineageTag: OrderID
+		summarizeBy: count
+		sourceColumn: OrderID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 94d2dfc6-57e1-47b6-8d29-17974ef2dd3f
+		sourceLineageTag: DateKey
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 5db1caad-8050-4586-95b9-762fcf3c29d8
+		sourceLineageTag: ProductKey
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationKey
+		dataType: int64
+		formatString: 0
+		lineageTag: ea47c5b9-2fec-49a9-b346-c492f8f701f3
+		sourceLineageTag: LocationKey
+		summarizeBy: none
+		sourceColumn: LocationKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChannelKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 91dfd4e2-f118-4491-a5a7-4d8b5c00e174
+		sourceLineageTag: ChannelKey
+		summarizeBy: none
+		sourceColumn: ChannelKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column EventType
+		dataType: string
+		lineageTag: 3ebb68f8-b88c-4d7c-b415-5934cbb037c3
+		sourceLineageTag: EventType
+		summarizeBy: none
+		sourceColumn: EventType
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuantitySigned
+		dataType: int64
+		formatString: #,0
+		lineageTag: 1806f6ba-048c-48c9-91f6-cb393b055046
+		sourceLineageTag: QuantitySigned
+		summarizeBy: sum
+		sourceColumn: QuantitySigned
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+	column GrossSalesSignedUSD
+		dataType: double
+		lineageTag: 81c5b0cc-7b21-4c8c-880d-4e59e935d16c
+		sourceLineageTag: GrossSalesSignedUSD
+		summarizeBy: sum
+		sourceColumn: GrossSalesSignedUSD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DiscountSignedUSD
+		dataType: double
+		lineageTag: f91fbf7e-da1c-44dd-86d5-4135b5a68025
+		sourceLineageTag: DiscountSignedUSD
+		summarizeBy: sum
+		sourceColumn: DiscountSignedUSD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NetSalesSignedUSD
+		dataType: double
+		lineageTag: 0bff6e3a-8ff2-4cda-b754-778612828871
+		sourceLineageTag: NetSalesSignedUSD
+		summarizeBy: sum
+		sourceColumn: NetSalesSignedUSD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COGSSignedUSD
+		dataType: double
+		lineageTag: aad9d867-b3ee-4a0c-9102-30e15b0da192
+		sourceLineageTag: COGSSignedUSD
+		summarizeBy: sum
+		sourceColumn: COGSSignedUSD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BatchID
+		dataType: string
+		lineageTag: a8eb94c8-3073-40c9-9505-2f91cbad2fd4
+		sourceLineageTag: BatchID
+		summarizeBy: none
+		sourceColumn: BatchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OriginalOrderID
+		dataType: int64
+		formatString: 0
+		lineageTag: 941037af-bccd-4da0-9b19-1b379d3938b9
+		sourceLineageTag: OriginalOrderID
+		summarizeBy: count
+		sourceColumn: OriginalOrderID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyCode
+		dataType: string
+		lineageTag: 9f3def06-ecc2-40d5-b680-3a68de96629e
+		sourceLineageTag: CurrencyCode
+		summarizeBy: none
+		sourceColumn: CurrencyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	partition factsales = entity
+		mode: directLake
+		source
+			entityName: factsales
+			schemaName: dbo
+			expressionSource: 'DirectLake - lh_dev_hackathon'
+

@@ -1,0 +1,123 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/reportExtension/1.0.0/schema.json",
+  "name": "extension",
+  "entities": [
+    {
+      "name": "factsales",
+      "measures": [
+        {
+          "name": "Sales Revenue (Legacy)",
+          "dataType": "Double",
+          "expression": "CALCULATE(SUM(factsales[NetSalesSignedUSD]), KEEPFILTERS(factsales[EventType] = \"Sale\"))",
+          "formatString": "$#,0.00;($#,0.00);$0.00",
+          "description": "Report-local calculation. Legacy revenue includes Sale events only; reconciliation includes posted returns."
+        },
+        {
+          "name": "Net Sales (Reconciliation)",
+          "dataType": "Double",
+          "expression": "SUM(factsales[NetSalesSignedUSD])",
+          "formatString": "$#,0.00;($#,0.00);$0.00",
+          "description": "Report-local calculation. Legacy revenue includes Sale events only; reconciliation includes posted returns."
+        },
+        {
+          "name": "Revenue Difference vs Approved",
+          "dataType": "Double",
+          "expression": "(CALCULATE(SUM(factsales[NetSalesSignedUSD]), KEEPFILTERS(factsales[EventType] = \"Sale\"))) - SUM(factsales[NetSalesSignedUSD])",
+          "formatString": "$#,0.00;($#,0.00);$0.00",
+          "description": "Report-local calculation. Legacy revenue includes Sale events only; reconciliation includes posted returns."
+        },
+        {
+          "name": "Revenue Difference %",
+          "dataType": "Double",
+          "expression": "DIVIDE((CALCULATE(SUM(factsales[NetSalesSignedUSD]), KEEPFILTERS(factsales[EventType] = \"Sale\"))) - SUM(factsales[NetSalesSignedUSD]), SUM(factsales[NetSalesSignedUSD]))",
+          "formatString": "0.0%",
+          "description": "Report-local calculation. Legacy revenue includes Sale events only; reconciliation includes posted returns."
+        },
+        {
+          "name": "Sale Order Count",
+          "dataType": "Double",
+          "expression": "CALCULATE(DISTINCTCOUNT(factsales[OrderID]), KEEPFILTERS(factsales[EventType] = \"Sale\"))",
+          "formatString": "#,0",
+          "description": "Report-local calculation. Legacy revenue includes Sale events only; reconciliation includes posted returns."
+        },
+        {
+          "name": "Average Order Value (Legacy)",
+          "dataType": "Double",
+          "expression": "DIVIDE(CALCULATE(SUM(factsales[NetSalesSignedUSD]), KEEPFILTERS(factsales[EventType] = \"Sale\")), CALCULATE(DISTINCTCOUNT(factsales[OrderID]), KEEPFILTERS(factsales[EventType] = \"Sale\")))",
+          "formatString": "$#,0.00;($#,0.00);$0.00",
+          "description": "Report-local calculation. Legacy revenue includes Sale events only; reconciliation includes posted returns."
+        },
+        {
+          "name": "Benchmark Sales Revenue (Legacy)",
+          "dataType": "Double",
+          "expression": "CALCULATE(SUM(factsales[NetSalesSignedUSD]), REMOVEFILTERS(), FILTER(ALL(dimdate), dimdate[CalendarDate] >= DATE(2026,9,1) && dimdate[CalendarDate] < DATE(2026,10,1)), dimchannel[ChannelName] = \"Online\", factsales[EventType] = \"Sale\")",
+          "formatString": "$#,0.00;($#,0.00);$0.00",
+          "description": "Fixed September 2026 Online benchmark calculated from live signed transactions. Removes report filters, then applies identical benchmark dates/channel. No hardcoded revenue."
+        },
+        {
+          "name": "Benchmark Net Sales",
+          "dataType": "Double",
+          "expression": "CALCULATE(SUM(factsales[NetSalesSignedUSD]), REMOVEFILTERS(), FILTER(ALL(dimdate), dimdate[CalendarDate] >= DATE(2026,9,1) && dimdate[CalendarDate] < DATE(2026,10,1)), dimchannel[ChannelName] = \"Online\")",
+          "formatString": "$#,0.00;($#,0.00);$0.00",
+          "description": "Fixed September 2026 Online benchmark calculated from live signed transactions. Removes report filters, then applies identical benchmark dates/channel. No hardcoded revenue."
+        },
+        {
+          "name": "Benchmark Revenue Difference",
+          "dataType": "Double",
+          "expression": "CALCULATE(SUM(factsales[NetSalesSignedUSD]), REMOVEFILTERS(), FILTER(ALL(dimdate), dimdate[CalendarDate] >= DATE(2026,9,1) && dimdate[CalendarDate] < DATE(2026,10,1)), dimchannel[ChannelName] = \"Online\", factsales[EventType] = \"Sale\") - CALCULATE(SUM(factsales[NetSalesSignedUSD]), REMOVEFILTERS(), FILTER(ALL(dimdate), dimdate[CalendarDate] >= DATE(2026,9,1) && dimdate[CalendarDate] < DATE(2026,10,1)), dimchannel[ChannelName] = \"Online\")",
+          "formatString": "$#,0.00;($#,0.00);$0.00",
+          "description": "Fixed September 2026 Online benchmark calculated from live signed transactions. Removes report filters, then applies identical benchmark dates/channel. No hardcoded revenue."
+        },
+        {
+          "name": "Sale Units",
+          "expression": "CALCULATE(SUM(factsales[QuantitySigned]), KEEPFILTERS(factsales[EventType] = \"Sale\"))",
+          "dataType": "Double",
+          "formatString": "#,0",
+          "description": "Sale-event commercial metric using verified signed transaction fields. Respects report filters."
+        },
+        {
+          "name": "Units per Sale Order",
+          "expression": "DIVIDE(CALCULATE(SUM(factsales[QuantitySigned]), KEEPFILTERS(factsales[EventType] = \"Sale\")), CALCULATE(DISTINCTCOUNT(factsales[OrderID]), KEEPFILTERS(factsales[EventType] = \"Sale\")))",
+          "dataType": "Double",
+          "formatString": "0.00",
+          "description": "Sale-event commercial metric using verified signed transaction fields. Respects report filters."
+        },
+        {
+          "name": "Average Revenue per Unit",
+          "expression": "DIVIDE(CALCULATE(SUM(factsales[NetSalesSignedUSD]), KEEPFILTERS(factsales[EventType] = \"Sale\")), CALCULATE(SUM(factsales[QuantitySigned]), KEEPFILTERS(factsales[EventType] = \"Sale\")))",
+          "dataType": "Double",
+          "formatString": "$#,0.00",
+          "description": "Sale-event commercial metric using verified signed transaction fields. Respects report filters."
+        },
+        {
+          "name": "Channel Revenue Share (Legacy)",
+          "dataType": "Double",
+          "expression": "DIVIDE(CALCULATE(SUM(factsales[NetSalesSignedUSD]), KEEPFILTERS(factsales[EventType] = \"Sale\")), CALCULATE(SUM(factsales[NetSalesSignedUSD]), KEEPFILTERS(factsales[EventType] = \"Sale\"), ALLSELECTED(dimchannel[ChannelName])))",
+          "formatString": "0.0%",
+          "description": "Sale-only revenue share of selected channels, retaining date and brand context. Totals recalculate as a ratio, not summed percentages."
+        },
+        {
+          "name": "Monthly Sales Revenue (Chart)",
+          "expression": "VAR AxisDate = MAX(dimdate[CalendarDate]) VAR MonthStart = DATE(YEAR(AxisDate), MONTH(AxisDate), 1) VAR MonthEnd = EOMONTH(AxisDate, 0) VAR SelectedMonthDates = FILTER(ALLSELECTED(dimdate[CalendarDate]), dimdate[CalendarDate] >= MonthStart && dimdate[CalendarDate] <= MonthEnd) VAR AnchorDate = MINX(SelectedMonthDates, dimdate[CalendarDate]) RETURN IF(AxisDate = AnchorDate, CALCULATE(SUM(factsales[NetSalesSignedUSD]), SelectedMonthDates, KEEPFILTERS(factsales[EventType] = \"Sale\")))",
+          "dataType": "Double",
+          "formatString": "$#,0;($#,0);$0",
+          "description": "Chart-only monthly total on the first selected date of each month. Preserves external date, channel and brand selections; includes Sale events only. Other daily axis points return BLANK. KPI logic is unchanged."
+        },
+        {
+          "name": "Monthly Order Value (Chart)",
+          "expression": "VAR AxisDate = MAX(dimdate[CalendarDate]) VAR MonthStart = DATE(YEAR(AxisDate), MONTH(AxisDate), 1) VAR MonthEnd = EOMONTH(AxisDate, 0) VAR SelectedMonthDates = FILTER(ALLSELECTED(dimdate[CalendarDate]), dimdate[CalendarDate] >= MonthStart && dimdate[CalendarDate] <= MonthEnd) VAR AnchorDate = MINX(SelectedMonthDates, dimdate[CalendarDate]) RETURN IF(AxisDate = AnchorDate, CALCULATE(DIVIDE(CALCULATE(SUM(factsales[NetSalesSignedUSD]), KEEPFILTERS(factsales[EventType] = \"Sale\")), CALCULATE(DISTINCTCOUNT(factsales[OrderID]), KEEPFILTERS(factsales[EventType] = \"Sale\"))), SelectedMonthDates))",
+          "dataType": "Double",
+          "formatString": "$#,0.00",
+          "description": "Chart-only monthly ratio of totals; one point per selected month. Preserves date, year, brand and channel selections; Sale events only."
+        },
+        {
+          "name": "Monthly Basket Size (Chart)",
+          "expression": "VAR AxisDate = MAX(dimdate[CalendarDate]) VAR MonthStart = DATE(YEAR(AxisDate), MONTH(AxisDate), 1) VAR MonthEnd = EOMONTH(AxisDate, 0) VAR SelectedMonthDates = FILTER(ALLSELECTED(dimdate[CalendarDate]), dimdate[CalendarDate] >= MonthStart && dimdate[CalendarDate] <= MonthEnd) VAR AnchorDate = MINX(SelectedMonthDates, dimdate[CalendarDate]) RETURN IF(AxisDate = AnchorDate, CALCULATE(DIVIDE(CALCULATE(SUM(factsales[QuantitySigned]), KEEPFILTERS(factsales[EventType] = \"Sale\")), CALCULATE(DISTINCTCOUNT(factsales[OrderID]), KEEPFILTERS(factsales[EventType] = \"Sale\"))), SelectedMonthDates))",
+          "dataType": "Double",
+          "formatString": "0.00",
+          "description": "Chart-only monthly ratio of totals; one point per selected month. Preserves date, year, brand and channel selections; Sale events only."
+        }
+      ]
+    }
+  ]
+}

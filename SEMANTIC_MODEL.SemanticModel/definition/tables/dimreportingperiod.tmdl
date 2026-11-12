@@ -1,0 +1,81 @@
+table dimreportingperiod
+	lineageTag: 22ee7407-4924-4c7a-a1a3-738c9d393aff
+	sourceLineageTag: [dbo].[dimreportingperiod]
+
+	column PeriodKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 916905a8-3030-4ea1-b9cc-cc1ea5b2cbdc
+		sourceLineageTag: PeriodKey
+		summarizeBy: none
+		sourceColumn: PeriodKey
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column MonthEndDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: cdc32269-690d-47c7-99f3-c11fc87c4e87
+		sourceLineageTag: MonthEndDateKey
+		summarizeBy: count
+		sourceColumn: MonthEndDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PeriodStatus
+		dataType: string
+		lineageTag: 8dd08c1f-652b-4cd5-af03-66630542a477
+		sourceLineageTag: PeriodStatus
+		summarizeBy: none
+		sourceColumn: PeriodStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsFinanceClosed
+		dataType: int64
+		formatString: 0
+		lineageTag: d2451713-e09e-433a-a56e-b398bc09226a
+		sourceLineageTag: IsFinanceClosed
+		summarizeBy: sum
+		sourceColumn: IsFinanceClosed
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsDataComplete
+		dataType: int64
+		formatString: 0
+		lineageTag: 779713a1-2e2e-47f5-a4ab-90fecdc53c54
+		sourceLineageTag: IsDataComplete
+		summarizeBy: sum
+		sourceColumn: IsDataComplete
+
+		annotation SummarizationSetBy = Automatic
+
+	column ApprovedAtDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e65f8651-e32a-4ad2-85ab-3e5158cc33a7
+		sourceLineageTag: ApprovedAtDate
+		summarizeBy: none
+		sourceColumn: ApprovedAtDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column BatchID
+		dataType: string
+		lineageTag: 05d1d555-38d1-4fe6-90ec-137fc7fb567e
+		sourceLineageTag: BatchID
+		summarizeBy: none
+		sourceColumn: BatchID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimreportingperiod = entity
+		mode: directLake
+		source
+			entityName: dimreportingperiod
+			schemaName: dbo
+			expressionSource: 'DirectLake - lh_dev_hackathon'
+

@@ -1,0 +1,176 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "SalesDrivers",
+  "displayName": "02 | Products & Channels",
+  "displayOption": "FitToPage",
+  "width": 1280,
+  "height": 720,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F5F7F8'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "brandEconomics",
+      "target": "brand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandEconomics",
+      "target": "brandRevenue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandEconomics",
+      "target": "brandVolumeValue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandEconomics",
+      "target": "channel",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandEconomics",
+      "target": "channelUnits",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandEconomics",
+      "target": "date",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandEconomics",
+      "target": "year",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandRevenue",
+      "target": "brand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandRevenue",
+      "target": "brandEconomics",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandRevenue",
+      "target": "brandVolumeValue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandRevenue",
+      "target": "channel",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandRevenue",
+      "target": "channelUnits",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandRevenue",
+      "target": "date",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandRevenue",
+      "target": "year",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandVolumeValue",
+      "target": "brand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandVolumeValue",
+      "target": "brandEconomics",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandVolumeValue",
+      "target": "brandRevenue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandVolumeValue",
+      "target": "channel",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandVolumeValue",
+      "target": "channelUnits",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandVolumeValue",
+      "target": "date",
+      "type": "DataFilter"
+    },
+    {
+      "source": "brandVolumeValue",
+      "target": "year",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelUnits",
+      "target": "brand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelUnits",
+      "target": "brandEconomics",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelUnits",
+      "target": "brandRevenue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelUnits",
+      "target": "brandVolumeValue",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelUnits",
+      "target": "channel",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelUnits",
+      "target": "date",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelUnits",
+      "target": "year",
+      "type": "DataFilter"
+    }
+  ]
+}

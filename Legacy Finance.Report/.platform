@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Legacy Finance"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bb691a08-322f-a73c-4b21-03cd35149051"
+  }
+}

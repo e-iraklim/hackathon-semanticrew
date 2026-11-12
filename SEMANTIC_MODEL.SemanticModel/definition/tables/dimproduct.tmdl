@@ -1,0 +1,98 @@
+table dimproduct
+	lineageTag: 7ffd5a7e-2746-4389-85bc-4f57d6c6e325
+	sourceLineageTag: [dbo].[dimproduct]
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 025750c3-4b18-4421-8c8b-d696aa799e8a
+		sourceLineageTag: ProductKey
+		summarizeBy: count
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SKU
+		dataType: string
+		lineageTag: 186cece0-9272-42ee-9510-2eb389669ed4
+		sourceLineageTag: SKU
+		summarizeBy: none
+		sourceColumn: SKU
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		lineageTag: def9937c-3e29-4bb5-b39e-f124c1c6d4b7
+		sourceLineageTag: ProductName
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 3bf3200a-ea8d-4e4e-a21e-1e7d2f585d41
+		sourceLineageTag: Category
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subcategory
+		dataType: string
+		lineageTag: 7145b393-53d4-4605-a52b-878d5c7024fa
+		sourceLineageTag: Subcategory
+		summarizeBy: none
+		sourceColumn: Subcategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Brand
+		dataType: string
+		lineageTag: 20b980f0-cad6-4d37-b0d4-976d10863285
+		sourceLineageTag: Brand
+		summarizeBy: none
+		sourceColumn: Brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column ListPriceUSD
+		dataType: double
+		lineageTag: 921f5ed0-e7ea-4020-8113-ba1023859718
+		sourceLineageTag: ListPriceUSD
+		summarizeBy: sum
+		sourceColumn: ListPriceUSD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UnitCostUSD
+		dataType: double
+		lineageTag: c430b6d9-9914-4f4e-9263-e268059c265c
+		sourceLineageTag: UnitCostUSD
+		summarizeBy: sum
+		sourceColumn: UnitCostUSD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IsActive
+		dataType: int64
+		formatString: 0
+		lineageTag: d2da3a16-80fd-4c8d-a37b-e45456ad625e
+		sourceLineageTag: IsActive
+		summarizeBy: sum
+		sourceColumn: IsActive
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimproduct = entity
+		mode: directLake
+		source
+			entityName: dimproduct
+			schemaName: dbo
+			expressionSource: 'DirectLake - lh_dev_hackathon'
+

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/reportExtension/1.0.0/schema.json",
+  "name": "extension",
+  "entities": [
+    {
+      "name": "factsales",
+      "measures": [
+        {
+          "name": "Net Sales_",
+          "dataType": "Double",
+          "expression": "\nSUM(factsales[NetSalesSignedUSD])",
+          "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+          "displayFolder": "Me"
+        },
+        {
+          "name": "COGS",
+          "dataType": "Double",
+          "expression": "\nSUM(factsales[COGSSignedUSD])",
+          "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+          "displayFolder": "Me"
+        },
+        {
+          "name": "Gross Profit",
+          "dataType": "Double",
+          "expression": "\n[Net Sales_] - [COGS]",
+          "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+          "displayFolder": "Me",
+          "references": {
+            "measures": [
+              {
+                "schema": "extension",
+                "entity": "factsales",
+                "name": "Net Sales_"
+              },
+              {
+                "schema": "extension",
+                "entity": "factsales",
+                "name": "COGS"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Gross Margin %",
+          "dataType": "Double",
+          "expression": "\nDIVIDE([Gross Profit], [Net Sales_])",
+          "formatString": "0.00\\ %;-0.00\\ %;0.00\\ %",
+          "displayFolder": "Me",
+          "references": {
+            "measures": [
+              {
+                "schema": "extension",
+                "entity": "factsales",
+                "name": "Gross Profit"
+              },
+              {
+                "schema": "extension",
+                "entity": "factsales",
+                "name": "Net Sales_"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Returns Amount",
+          "dataType": "Double",
+          "expression": "\nCALCULATE(\n    SUM(factsales[GrossSalesSignedUSD]),\n    factsales[EventType] = \"Return\"\n) * -1",
+          "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+          "displayFolder": "Me"
+        },
+        {
+          "name": "Gross Sales (Bridge)",
+          "dataType": "Double",
+          "expression": "\nCALCULATE(\n    SUM(factsales[GrossSalesSignedUSD]),\n    factsales[EventType] = \"Sale\"\n)",
+          "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+          "displayFolder": "Me"
+        },
+        {
+          "name": "Discounts (Bridge)",
+          "dataType": "Double",
+          "expression": "\nCALCULATE(\n    SUM(factsales[DiscountSignedUSD]),\n    factsales[EventType] = \"Sale\"\n)",
+          "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+          "displayFolder": "Me"
+        },
+        {
+          "name": "Returns Impact (Bridge)",
+          "dataType": "Double",
+          "expression": "\nCALCULATE(\n    SUM(factsales[NetSalesSignedUSD]),\n    factsales[EventType] = \"Return\"\n)\n",
+          "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+          "displayFolder": "Me"
+        }
+      ]
+    }
+  ]
+}

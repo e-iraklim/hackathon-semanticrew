@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Legacy Sales",
+    "description": ""
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "13fb10d7-5576-b487-418b-86ccd9da1939"
+  }
+}

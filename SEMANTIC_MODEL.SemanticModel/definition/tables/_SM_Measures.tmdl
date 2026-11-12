@@ -1,0 +1,171 @@
+table _SM_Measures
+	lineageTag: ed7ad195-1eca-4587-b793-0cf35cd32a08
+
+	measure 'SM Net Sales' = SUM ( FactSales[NetSalesSignedUSD] )
+		lineageTag: dd664811-6773-4dd2-8ff8-11f6b3b5b7a8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Gross Sales' = SUM ( FactSales[GrossSalesSignedUSD] )
+		lineageTag: 7b27edaa-98d2-478f-802f-0bcdbea0134e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Discounts Signed' = SUM ( FactSales[DiscountSignedUSD] )
+		lineageTag: 74ec389b-67a0-467a-85c8-d6879c6c4a1c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM COGS' = SUM ( FactSales[COGSSignedUSD] )
+		lineageTag: 87164982-0be1-47d6-a096-2dbe0970a32a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Gross Profit' = [SM Net Sales] - [SM COGS]
+		lineageTag: 1531f29d-2818-4889-8004-31b30f7af83d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Gross Margin %' = DIVIDE ( [SM Gross Profit], [SM Net Sales] )
+		lineageTag: 5b919cb2-5b4f-4a65-93b9-4b9f7037a131
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Net Units' = SUM ( FactSales[QuantitySigned] )
+		formatString: 0
+		lineageTag: 403edab0-2f82-44cd-9fd4-e17b30364e56
+
+	measure 'SM Order Count' = CALCULATE ( DISTINCTCOUNT ( FactSales[OrderID] ), FactSales[EventType] = "Sale" )
+		formatString: 0
+		lineageTag: 011a6418-ee9f-474b-9930-c850aa03c7c4
+
+	measure 'SM Average Order Value' = DIVIDE ( CALCULATE ( [SM Net Sales], FactSales[EventType] = "Sale" ), [SM Order Count] )
+		lineageTag: bf578bdf-4a16-4b36-8636-02f3f1f937c1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Return Amount' = -CALCULATE ( [SM Net Sales], FactSales[EventType] = "Return" )
+		lineageTag: 07819cde-cd58-488c-a3d3-d11fb0c0a0ae
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Return Rate %' = DIVIDE ( [SM Return Amount], CALCULATE ( [SM Net Sales], FactSales[EventType] = "Sale" ) )
+		lineageTag: d19529eb-6300-49c5-ad01-c4edfd585adc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Net Sales LY' = CALCULATE ( [SM Net Sales], SAMEPERIODLASTYEAR ( DimDate[CalendarDate] ) )
+		lineageTag: 4c261a99-5986-4c0e-9607-be5cd31d8099
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Net Sales YoY %' = DIVIDE ( [SM Net Sales] - [SM Net Sales LY], [SM Net Sales LY] )
+		lineageTag: ca66cd90-16ce-4bec-8d7d-86dad6d95c8d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Gross Margin LY %' = CALCULATE ( [SM Gross Margin %], SAMEPERIODLASTYEAR ( DimDate[CalendarDate] ) )
+		lineageTag: 558c0217-bf3c-4794-ba7f-3154f4aea2d5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Gross Margin YoY pp' = ( [SM Gross Margin %] - [SM Gross Margin LY %] ) * 100
+		lineageTag: 2d454db8-96c9-4dba-b0ca-1a522ea5fc3c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Net Sales YTD' = TOTALYTD ( [SM Net Sales], DimDate[CalendarDate] )
+		lineageTag: 940dea4e-619d-4d1f-b535-ad936d65791c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Latest Closed Month End' =
+			
+			VAR LatestPeriod = MAXX ( FILTER ( ALL ( DimReportingPeriod ), DimReportingPeriod[IsFinanceClosed] = 1 && DimReportingPeriod[IsDataComplete] = 1 ), DimReportingPeriod[MonthEndDateKey] )
+			RETURN DATE ( INT ( LatestPeriod / 10000 ), MOD ( INT ( LatestPeriod / 100 ), 100 ), MOD ( LatestPeriod, 100 ) )
+		formatString: General Date
+		lineageTag: 01d7f762-98e1-4be1-a93d-39b2e55ffa7e
+
+	measure 'SM Net Sales Latest Closed Month' =
+			
+			VAR E = [SM Latest Closed Month End]
+			RETURN CALCULATE ( [SM Average Order Value], REMOVEFILTERS ( DimDate ), DATESBETWEEN ( DimDate[CalendarDate], DATE ( YEAR(E), MONTH(E), 1 ), E ) )
+		lineageTag: 6e90a5e8-9053-4748-9efa-cbec3fe63bb3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Net Sales Latest Closed Month LY' =
+			
+			VAR E = EDATE ( [SM Latest Closed Month End], -12 )
+			RETURN CALCULATE ( [Net Sales], REMOVEFILTERS ( DimDate ), DATESBETWEEN ( DimDate[CalendarDate], DATE ( YEAR(E), MONTH(E), 1 ), EOMONTH ( E, 0 ) ) )
+		lineageTag: 44f30033-f18a-4fa8-be04-01ba25065643
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Net Sales Latest Closed Month YoY %' = DIVIDE ( [SM Net Sales Latest Closed Month] - [SM Net Sales Latest Closed Month LY], [SM Net Sales Latest Closed Month LY] )
+		lineageTag: 00e79683-7e14-448d-b694-c6578bc9ede9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Gross Profit Latest Closed Month' =
+			
+			VAR E = [SM Latest Closed Month End]
+			RETURN CALCULATE ( [SM Gross Profit], REMOVEFILTERS ( DimDate ), DATESBETWEEN ( DimDate[CalendarDate], DATE ( YEAR(E), MONTH(E), 1 ), E ) )
+		lineageTag: f2d603b2-47bd-447f-b2c6-334bf5fb8e61
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Gross Margin Latest Closed Month %' = DIVIDE ( [SM Gross Profit Latest Closed Month], [SM Net Sales Latest Closed Month] )
+		lineageTag: d60dc596-5d87-45da-b973-6e1f310ae9a4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Gross Profit Latest Closed Month LY' =
+			
+			VAR E = EDATE ( [SM Latest Closed Month End], -12 )
+			RETURN CALCULATE ( [SM Gross Profit], REMOVEFILTERS ( DimDate ), DATESBETWEEN ( DimDate[CalendarDate], DATE ( YEAR(E), MONTH(E), 1 ), EOMONTH ( E, 0 ) ) )
+		lineageTag: db6721e4-488f-422c-bbee-07dab6005548
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Gross Margin Latest Closed Month LY %' = DIVIDE ( [SM Gross Profit Latest Closed Month LY], [SM Net Sales Latest Closed Month LY] )
+		lineageTag: 415c3678-c50b-4a5b-b6f7-75f3dc250852
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Gross Margin Latest Closed Month YoY pp' = ( [SM Gross Margin Latest Closed Month %] - [SM Gross Margin Latest Closed Month LY %] ) * 100
+		lineageTag: 3e66869d-8d0f-477a-b5d1-fb64cb4bd924
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SM Closing Inventory Units' =
+			
+			VAR LastApprovedDate = CALCULATE ( MAX ( FactInventorySnapshot[DateKey] ), REMOVEFILTERS ( DimDate ), FactInventorySnapshot[IsSnapshotComplete] = 1 )
+			RETURN CALCULATE ( SUM ( FactInventorySnapshot[OnHandQty] ), REMOVEFILTERS ( DimDate ), FactInventorySnapshot[DateKey] = LastApprovedDate, FactInventorySnapshot[IsSnapshotComplete] = 1 )
+		formatString: 0
+		lineageTag: 0fda9fd0-4aab-48b9-82f7-36a528d88aba
+
+	measure 'SM Closing Inventory Value' =
+			
+			VAR LastApprovedDate = CALCULATE ( MAX ( FactInventorySnapshot[DateKey] ), REMOVEFILTERS ( DimDate ), FactInventorySnapshot[IsSnapshotComplete] = 1 )
+			RETURN CALCULATE ( SUM ( FactInventorySnapshot[InventoryValueUSD] ), REMOVEFILTERS ( DimDate ), FactInventorySnapshot[DateKey] = LastApprovedDate, FactInventorySnapshot[IsSnapshotComplete] = 1 )
+		lineageTag: a2a0840c-6bfa-4fe8-8107-12b9ded3b999
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Value
+		isHidden
+		formatString: 0
+		lineageTag: f0e8adf2-3aee-433f-978a-04ff0caffd86
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _SM_Measures = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_Id = e9e56c3c6aae40e195407199dce3af4c
+

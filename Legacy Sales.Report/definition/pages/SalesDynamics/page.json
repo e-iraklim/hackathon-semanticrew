@@ -1,0 +1,126 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "SalesDynamics",
+  "displayName": "03 | Trends & Opportunities",
+  "displayOption": "FitToPage",
+  "width": 1280,
+  "height": 720,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F5F7F8'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "basketTrend",
+      "target": "brand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "basketTrend",
+      "target": "channel",
+      "type": "DataFilter"
+    },
+    {
+      "source": "basketTrend",
+      "target": "channelOrderDemand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "basketTrend",
+      "target": "date",
+      "type": "DataFilter"
+    },
+    {
+      "source": "basketTrend",
+      "target": "orderValueTrend",
+      "type": "DataFilter"
+    },
+    {
+      "source": "basketTrend",
+      "target": "year",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelOrderDemand",
+      "target": "basketTrend",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelOrderDemand",
+      "target": "brand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelOrderDemand",
+      "target": "channel",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelOrderDemand",
+      "target": "date",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelOrderDemand",
+      "target": "orderValueTrend",
+      "type": "DataFilter"
+    },
+    {
+      "source": "channelOrderDemand",
+      "target": "year",
+      "type": "DataFilter"
+    },
+    {
+      "source": "orderValueTrend",
+      "target": "basketTrend",
+      "type": "DataFilter"
+    },
+    {
+      "source": "orderValueTrend",
+      "target": "brand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "orderValueTrend",
+      "target": "channel",
+      "type": "DataFilter"
+    },
+    {
+      "source": "orderValueTrend",
+      "target": "channelOrderDemand",
+      "type": "DataFilter"
+    },
+    {
+      "source": "orderValueTrend",
+      "target": "date",
+      "type": "DataFilter"
+    },
+    {
+      "source": "orderValueTrend",
+      "target": "year",
+      "type": "DataFilter"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Approved — Online, September 2026"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "44d50a9a-a645-932e-452b-e51519f4f7f8"
+  }
+}

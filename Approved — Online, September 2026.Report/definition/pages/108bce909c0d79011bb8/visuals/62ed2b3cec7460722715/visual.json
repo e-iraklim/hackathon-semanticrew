@@ -1,0 +1,210 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "62ed2b3cec7460722715",
+  "position": {
+    "x": 38.372201955969395,
+    "y": 256.39607670579551,
+    "z": 7,
+    "height": 284.30313267377323,
+    "width": 1841.8656938865311,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Schema": "extension",
+                      "Entity": "factsales"
+                    }
+                  },
+                  "Property": "Gross Sales (Bridge)"
+                }
+              },
+              "queryRef": "factsales.Gross Sales (Bridge)",
+              "nativeQueryRef": "Gross Sales (Bridge)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Schema": "extension",
+                      "Entity": "factsales"
+                    }
+                  },
+                  "Property": "Discounts (Bridge)"
+                }
+              },
+              "queryRef": "factsales.Discounts (Bridge)",
+              "nativeQueryRef": "Discounts (Bridge)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Schema": "extension",
+                      "Entity": "factsales"
+                    }
+                  },
+                  "Property": "Returns Impact (Bridge)"
+                }
+              },
+              "queryRef": "factsales.Returns Impact (Bridge)",
+              "nativeQueryRef": "Returns Impact (Bridge)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Schema": "extension",
+                      "Entity": "factsales"
+                    }
+                  },
+                  "Property": "Net Sales_"
+                }
+              },
+              "queryRef": "factsales.Net Sales",
+              "nativeQueryRef": "Net Sales_"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Schema": "extension",
+                    "Entity": "factsales"
+                  }
+                },
+                "Property": "Gross Sales (Bridge)"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'NET SALES BUILD-UP '"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9cc1e8014d616de8d26a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Schema": "extension",
+                "Entity": "factsales"
+              }
+            },
+            "Property": "Gross Sales (Bridge)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "da740b788695114e7aa8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Schema": "extension",
+                "Entity": "factsales"
+              }
+            },
+            "Property": "Discounts (Bridge)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fb46a41f64a59c32e8d2",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Schema": "extension",
+                "Entity": "factsales"
+              }
+            },
+            "Property": "Returns Impact (Bridge)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "80bd9d5540c5b8520d66",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Schema": "extension",
+                "Entity": "factsales"
+              }
+            },
+            "Property": "Net Sales_"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

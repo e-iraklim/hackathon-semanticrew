@@ -1,0 +1,111 @@
+table factinventorysnapshot
+	lineageTag: 2a828331-16b0-40af-913a-24b509c2f135
+	sourceLineageTag: [dbo].[factinventorysnapshot]
+
+	column InventorySnapshotKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 6194eaf6-39d6-4912-8906-8ae8f1f20fbd
+		sourceLineageTag: InventorySnapshotKey
+		summarizeBy: count
+		sourceColumn: InventorySnapshotKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: c01889f8-ab88-4c6b-a5d4-e0a67b7e235e
+		sourceLineageTag: DateKey
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b730883-95e2-4503-bdbc-99d9b493fbdc
+		sourceLineageTag: ProductKey
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 47a459ab-88eb-4b18-a716-ccb7e55e79ae
+		sourceLineageTag: LocationKey
+		summarizeBy: none
+		sourceColumn: LocationKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column OnHandQty
+		dataType: int64
+		formatString: 0
+		lineageTag: cf74aaab-6757-48e2-affe-20f9b4b584ed
+		sourceLineageTag: OnHandQty
+		summarizeBy: sum
+		sourceColumn: OnHandQty
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitCostUSD
+		dataType: double
+		lineageTag: 2cb58f15-463d-4541-93a3-1ae4f9b7c644
+		sourceLineageTag: UnitCostUSD
+		summarizeBy: sum
+		sourceColumn: UnitCostUSD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column InventoryValueUSD
+		dataType: double
+		lineageTag: 9a991f0e-8f00-4b7a-a478-21158c2a9d7a
+		sourceLineageTag: InventoryValueUSD
+		summarizeBy: sum
+		sourceColumn: InventoryValueUSD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IsSnapshotComplete
+		dataType: int64
+		formatString: 0
+		lineageTag: 7fc2c9b9-0a41-4390-aa83-0797cbd445a0
+		sourceLineageTag: IsSnapshotComplete
+		summarizeBy: sum
+		sourceColumn: IsSnapshotComplete
+
+		annotation SummarizationSetBy = Automatic
+
+	column BatchID
+		dataType: string
+		lineageTag: 2715c821-6d68-4fd7-8421-43f9dfb7bdda
+		sourceLineageTag: BatchID
+		summarizeBy: none
+		sourceColumn: BatchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyCode
+		dataType: string
+		lineageTag: 02be87eb-6460-498b-936e-15a0e9120943
+		sourceLineageTag: CurrencyCode
+		summarizeBy: none
+		sourceColumn: CurrencyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	partition factinventorysnapshot = entity
+		mode: directLake
+		source
+			entityName: factinventorysnapshot
+			schemaName: dbo
+			expressionSource: 'DirectLake - lh_dev_hackathon'
+

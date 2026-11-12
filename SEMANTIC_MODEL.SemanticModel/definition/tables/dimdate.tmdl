@@ -1,0 +1,100 @@
+table dimdate
+	lineageTag: 0ca08e9f-0a01-47c2-992e-f5331f3730d9
+	sourceLineageTag: [dbo].[dimdate]
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: bea0db88-c8a7-45ec-bf24-15320da64252
+		sourceLineageTag: DateKey
+		summarizeBy: count
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalendarDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1ad0c788-b956-4305-89be-ed02c8170be1
+		sourceLineageTag: CalendarDate
+		summarizeBy: none
+		sourceColumn: CalendarDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: b2dce312-677b-4fd2-a4c3-4122d808ee14
+		sourceLineageTag: Year
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e924c07-d883-47b2-9e07-e677ee651a4d
+		sourceLineageTag: MonthNumber
+		summarizeBy: sum
+		sourceColumn: MonthNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: 252bc095-3193-4ad0-99a6-bde72016f251
+		sourceLineageTag: MonthName
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuarterNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: d08a97ed-7a70-4d0d-885c-bcc5e76fdd4e
+		sourceLineageTag: QuarterNumber
+		summarizeBy: sum
+		sourceColumn: QuarterNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISOWeekday
+		dataType: int64
+		formatString: 0
+		lineageTag: cde46950-e766-4f5c-b00d-a6bc5d2766fa
+		sourceLineageTag: ISOWeekday
+		summarizeBy: sum
+		sourceColumn: ISOWeekday
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWeekend
+		dataType: int64
+		formatString: 0
+		lineageTag: a241bc4f-cf9c-4e3c-8e2d-08bb22be062a
+		sourceLineageTag: IsWeekend
+		summarizeBy: sum
+		sourceColumn: IsWeekend
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsMonthEnd
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b6e103d-f42e-4687-ac79-0bee813759a4
+		sourceLineageTag: IsMonthEnd
+		summarizeBy: sum
+		sourceColumn: IsMonthEnd
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimdate = entity
+		mode: directLake
+		source
+			entityName: dimdate
+			schemaName: dbo
+			expressionSource: 'DirectLake - lh_dev_hackathon'
+

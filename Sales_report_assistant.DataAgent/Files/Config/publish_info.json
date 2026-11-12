@@ -1,0 +1,4 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/publishInfo/1.0.0/schema.json",
+  "description": "Executive Conversational BI Assistant for the One Number Retail initiative. Delivers certified reporting on Net Sales, Gross Margin, and inventory across Online and Retail channels. Provides step-by-step guidance, breakdown analysis by Category, Brand, and Region, and strict financial period governance (anchored to closed September 2026)."
+}
